@@ -21,7 +21,7 @@ const PORT = process.env.PORT || 3000;
 mongoose.Promise = global.Promise;
 
 mongoose
-  .connect("mongodb://localhost:27017/bitespeed")
+  .connect(process.env.MONGO_URI)
   .then(() => {
     app.listen(PORT, (req, res) => {
       console.log(`server is running on port ${PORT}`);
