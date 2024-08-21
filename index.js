@@ -12,7 +12,10 @@ app.use(bodyparser.json());
 dotenv.config();
 
 app.get("/", (req, res) => {
-  res.send("Hello");
+  res.send("Hello!");
+  res.send(
+    "Please use Postman to test the /identify API endpoint at: https://bitespeed-nqgo.onrender.com/identify"
+  );
 });
 
 app.use("/identify", routes);
