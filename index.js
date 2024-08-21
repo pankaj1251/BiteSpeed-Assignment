@@ -2,6 +2,7 @@ const express = require("express");
 const bodyparser = require("body-parser");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const routes = require("./routes/identify");
 
 const app = express();
 
@@ -14,11 +15,13 @@ app.get("/", (req, res) => {
   res.send("Hello");
 });
 
-const PORT = 3000;
+app.use("/identify", routes);
+
+const PORT = process.env.PORT || 3000;
 mongoose.Promise = global.Promise;
 
 mongoose
-  .connect("mongodb://localhost:27017/user-data")
+  .connect("mongodb://localhost:27017/bitespeed")
   .then(() => {
     app.listen(PORT, (req, res) => {
       console.log(`server is running on port ${PORT}`);
