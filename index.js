@@ -14,8 +14,17 @@ app.get("/", (req, res) => {
   res.send("Hello");
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
+mongoose.Promise = global.Promise;
 
-app.listen(PORT, (req, res) => {
-  console.log(`server is running on port ${PORT}`);
-});
+mongoose
+  .connect("mongodb://localhost:27017/user-data")
+  .then(() => {
+    app.listen(PORT, (req, res) => {
+      console.log(`server is running on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.log("Could not connect to database", err);
+    process.exit();
+  });
